@@ -1,12 +1,17 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
 )
+
+type myShit struct {
+	USD float64
+}
 
 func main() {
 	var typ string
@@ -15,7 +20,7 @@ func main() {
 	var price string
 	fmt.Print("Enter the currency(UPPERCASE):\t")
 	_, err := fmt.Scanln(&currency)
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 
@@ -24,7 +29,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 
 	urls := fmt.Sprintf("https://min-api.cryptocompare.com/data/price?fsym=%s&tsyms=%s", currency, price)
 	resp, err := http.Get(urls)
@@ -54,5 +58,9 @@ func main() {
 	s = strings.Split(j2, "}")
 	value = s[0]
 	fmt.Println(value)
+
+	shit := myShit{}
+	json.Unmarshal([]byte(out), &shit)
+	fmt.Println(shit.USD)
 
 }
