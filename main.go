@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-type myShit struct {
+type Money struct {
 	USD float64
 }
 
@@ -59,8 +59,8 @@ func main() {
 	value = s[0]
 	fmt.Println(value)
 
-	shit := myShit{}
-	json.Unmarshal([]byte(out), &shit)
-	fmt.Println(shit.USD)
+	usd := Money{}
+	json.Unmarshal([]byte(out), &usd)
+	fmt.Println(usd.USD)
 
 }
